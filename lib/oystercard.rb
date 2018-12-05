@@ -18,17 +18,13 @@ class Oystercard
 
   def touch_in
     raise "YOU SHALL NOT PASSSSSSS" if @balance < MIN_LIMIT
-    if @status == false
-      @status = true
-    end
+    @status = true
     return "in use"
   end
 
   def touch_out
     self.deduct
-    if @status == true
-      @status = false
-    end
+    @status = false
     return "fare completed"
   end
 
@@ -36,8 +32,8 @@ class Oystercard
     @status == true
   end
 
-    def deduct
-      @balance -= MIN_LIMIT
-    end
+  def deduct
+    @balance -= MIN_LIMIT
+  end
 
 end
