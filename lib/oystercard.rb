@@ -24,7 +24,7 @@ class Oystercard
     @status = true
     @entry_station = entry_station
   end
-
+  
   def touch_out(exit_station)
     deduct
     @status = false
