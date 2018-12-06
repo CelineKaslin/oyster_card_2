@@ -26,7 +26,7 @@ describe Oystercard do
    context "#touch_in" do
      xit "should give you a state 'in use' for your oystercard" do
        subject.topup(2)
-       expect(subject.touch_in(:entry_station)). to eq "station name"
+       expect(subject.touch_in(:entry_station)). to eq "in use"
      end
 
      it "should raise an error if balance is less than £1 on touch in" do
