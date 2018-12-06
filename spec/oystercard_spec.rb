@@ -29,29 +29,30 @@ describe Oystercard do
     end
 
    context "#touch_in" do
-   #   xit "should give you a state 'in use' for your oystercard" do
-   #     subject.topup(2)
-   #     expect(subject.touch_in(:entry_station)). to eq "in use"
-   #   end
-
      it "should raise an error if balance is less than £1 on touch in" do
        expect{ subject.touch_in(:entry_station) }.to raise_error "YOU SHALL NOT PASSSSSSS"
      end
 
-     it "should record the entry station when touch in" do
+     it "should record and store the entry station when touch in" do
        subject.topup(2)
        expect(subject.touch_in(:entry_station)).to eq [:entry_station]
      end
    end
 
    context "#touch_out" do
-     it "should give you a state 'fare completed' for your oystercard" do
+     xit "should give you a state 'fare completed' for your oystercard" do
        expect(subject.touch_out(:exit_station)). to eq "fare completed"
      end
 
      it "should deduct the correct fare on touch out" do
        expect {subject.touch_out(:exit_station)}.to change{subject.balance}.by -Oystercard::MIN_LIMIT
      end
+
+     it "should remember the exit station when touch out" do
+       subject.topup(2)
+       expect(subject.touch_out(:exit_station)).to eq :exit_station
+     end
+
    end
 
    it "should return true if we are touched in" do
