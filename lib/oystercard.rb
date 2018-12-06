@@ -1,6 +1,6 @@
 class Oystercard
 
-  attr_reader :balance, :entry_station, :exit_station, :journey_history
+  attr_accessor :balance, :entry_station, :exit_station, :journey_history
 
   MAX_LIMIT = 90
   MIN_LIMIT = 1
@@ -34,7 +34,7 @@ class Oystercard
   end
 
   def in_journey?
-    @status == true && @entry_station !=nil
+    @status == true && @entry_station !=nil && @exit_station == nil
   end
 
   private
