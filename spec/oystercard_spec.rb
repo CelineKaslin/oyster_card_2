@@ -2,7 +2,7 @@ require "oystercard"
 
 describe Oystercard do
 
-  let(:station) {double :station}
+  let(:entry_station) {double :entry_station}
 
   it { is_expected.to respond_to(:balance) }
 
@@ -26,16 +26,16 @@ describe Oystercard do
    context "#touch_in" do
      xit "should give you a state 'in use' for your oystercard" do
        subject.topup(2)
-       expect(subject.touch_in(station)). to eq "station name"
+       expect(subject.touch_in(:entry_station)). to eq "station name"
      end
 
      it "should raise an error if balance is less than £1 on touch in" do
-       expect{ subject.touch_in(station) }.to raise_error "YOU SHALL NOT PASSSSSSS"
+       expect{ subject.touch_in(:entry_station) }.to raise_error "YOU SHALL NOT PASSSSSSS"
      end
 
      it "should record the entry station when touch in" do
        subject.topup(2)
-       expect(subject.touch_in(station)).to eq "entry station"
+       expect(subject.touch_in(:entry_station)).to eq :entry_station
      end
 
    end
@@ -52,7 +52,7 @@ describe Oystercard do
 
    it "should return true if we are touched in" do
      subject.topup(2)
-     subject.touch_in(station)
+     subject.touch_in(:entry_station)
      expect(subject.in_journey?).to eq true
    end
 

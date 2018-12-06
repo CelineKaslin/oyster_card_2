@@ -20,7 +20,8 @@ class Oystercard
   def touch_in(entry_station)
     raise "YOU SHALL NOT PASSSSSSS" if @balance < MIN_LIMIT
     @status = true
-    return "entry station"
+    # return "entry station"
+    @entry_station = entry_station
   end
 
   def touch_out
