@@ -3,6 +3,7 @@ require "oystercard"
 describe Oystercard do
 
   let(:entry_station) {double :entry_station}
+  let(:exit_station) {double :exit_station}
 
   it { is_expected.to respond_to(:balance) }
 
@@ -23,11 +24,15 @@ describe Oystercard do
       expect{ subject.topup(10) }.to raise_error "Sorry, limit exceeded!"
     end
 
+    it "should not have any journey initially stored" do
+      expect(subject.journey_history). to eq []
+    end
+
    context "#touch_in" do
-     xit "should give you a state 'in use' for your oystercard" do
-       subject.topup(2)
-       expect(subject.touch_in(:entry_station)). to eq "in use"
-     end
+   #   xit "should give you a state 'in use' for your oystercard" do
+   #     subject.topup(2)
+   #     expect(subject.touch_in(:entry_station)). to eq "in use"
+   #   end
 
      it "should raise an error if balance is less than £1 on touch in" do
        expect{ subject.touch_in(:entry_station) }.to raise_error "YOU SHALL NOT PASSSSSSS"
@@ -35,18 +40,17 @@ describe Oystercard do
 
      it "should record the entry station when touch in" do
        subject.topup(2)
-       expect(subject.touch_in(:entry_station)).to eq :entry_station
+       expect(subject.touch_in(:entry_station)).to eq [:entry_station]
      end
-
    end
 
    context "#touch_out" do
      it "should give you a state 'fare completed' for your oystercard" do
-       expect(subject.touch_out). to eq "fare completed"
+       expect(subject.touch_out(:exit_station)). to eq "fare completed"
      end
 
      it "should deduct the correct fare on touch out" do
-       expect {subject.touch_out}.to change{subject.balance}.by -Oystercard::MIN_LIMIT
+       expect {subject.touch_out(:exit_station)}.to change{subject.balance}.by -Oystercard::MIN_LIMIT
      end
    end
 
