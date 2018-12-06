@@ -23,7 +23,7 @@ class Oystercard
   end
 
   def touch_out
-    self.deduct
+    deduct
     @status = false
     return "fare completed"
   end
@@ -31,6 +31,8 @@ class Oystercard
   def in_journey?
     @status == true
   end
+
+  private
 
   def deduct
     @balance -= MIN_LIMIT

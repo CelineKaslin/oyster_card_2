@@ -21,10 +21,6 @@ describe Oystercard do
       expect{ subject.topup(10) }.to raise_error "Sorry, limit exceeded!"
     end
 
-   it "deducts the fare from my card balance" do
-     expect{ subject.deduct }.to change{ subject.balance }.by -Oystercard::MIN_LIMIT
-   end
-
    context "#touch_in" do
      it "should give you a state 'in use' for your oystercard" do
        subject.topup(2)
