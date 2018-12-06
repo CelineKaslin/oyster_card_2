@@ -35,15 +35,11 @@ describe Oystercard do
 
      it "should record and store the entry station when touch in" do
        subject.topup(2)
-       expect(subject.touch_in(:entry_station)).to eq [:entry_station]
+       expect(subject.touch_in(:entry_station)).to eq :entry_station
      end
    end
 
    context "#touch_out" do
-     xit "should give you a state 'fare completed' for your oystercard" do
-       expect(subject.touch_out(:exit_station)). to eq "fare completed"
-     end
-
      it "should deduct the correct fare on touch out" do
        expect {subject.touch_out(:exit_station)}.to change{subject.balance}.by -Oystercard::MIN_LIMIT
      end
@@ -52,13 +48,19 @@ describe Oystercard do
        subject.topup(2)
        expect(subject.touch_out(:exit_station)).to eq :exit_station
      end
-
    end
 
    it "should return true if we are touched in" do
      subject.topup(2)
      subject.touch_in(:entry_station)
      expect(subject.in_journey?).to eq true
+   end
+
+   it "should have 1 journey created after touch_in and touch_out" do
+     subject.topup(3)
+     subject.touch_in(:entry_station)
+     subject.touch_out(:exit_station)
+     expect(subject.journey_history).to include(started: :entry_station, ended: :exit_station)
    end
 
 end

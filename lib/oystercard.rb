@@ -23,16 +23,14 @@ class Oystercard
     raise "YOU SHALL NOT PASSSSSSS" if @balance < MIN_LIMIT
     @status = true
     @entry_station = entry_station
-    @journey_history << entry_station
   end
 
   def touch_out(exit_station)
     deduct
     @status = false
+    @journey_history << {started: entry_station, ended: exit_station}
     @entry_station = nil
     @exit_station = exit_station
-    # @journey_history << exit_station
-    # return "fare completed"
   end
 
   def in_journey?
