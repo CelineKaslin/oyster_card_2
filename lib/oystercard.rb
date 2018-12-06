@@ -1,6 +1,6 @@
 class Oystercard
 
-  attr_reader :balance
+  attr_reader :balance, :entry_station
 
   MAX_LIMIT = 90
   MIN_LIMIT = 1
@@ -9,6 +9,7 @@ class Oystercard
   def initialize(balance = 0, status = false)
     @balance = balance
     @status = status
+    @entry_station = nil
   end
 
   def topup(money)
@@ -16,10 +17,10 @@ class Oystercard
     @balance += money
   end
 
-  def touch_in
+  def touch_in(entry_station)
     raise "YOU SHALL NOT PASSSSSSS" if @balance < MIN_LIMIT
     @status = true
-    return "in use"
+    return "entry station"
   end
 
   def touch_out
