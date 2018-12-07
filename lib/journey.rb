@@ -1,6 +1,8 @@
 class Journey
   attr_reader :status
-
+  MIN_FARE = 1
+  PENALTY_FARE = 6
+  
   def initialize
     @status = nil
     @entry = nil
@@ -15,6 +17,10 @@ class Journey
   def finish(exit)
     @exit = exit
     @status = false
+  end
+
+  def fare
+    in_use? ? PENALTY_FARE : MIN_FARE
   end
 
   def in_use?
