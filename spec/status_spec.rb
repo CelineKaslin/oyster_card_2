@@ -1,6 +1,6 @@
-require 'journey'
+require 'status'
 
-describe Journey do
+describe Status do
 
   let(:status) {double :status}
   let(:entry) {double :entry}
@@ -26,13 +26,11 @@ describe Journey do
     it "should return min fare" do
       subject.start(:entry)
       subject.finish(:exit)
-      expect(subject.fare).to eq Journey::MIN_FARE
+      expect(subject.fare).to eq Status::MIN_FARE
     end
     it "should return penalty fare" do
       subject.start(:entry)
-      expect(subject.fare).to eq Journey::PENALTY_FARE
+      expect(subject.fare).to eq Status::PENALTY_FARE
     end
   end
-
-
 end

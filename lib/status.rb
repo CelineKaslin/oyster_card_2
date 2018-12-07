@@ -1,8 +1,8 @@
-class Journey
+class Status
   attr_reader :status
   MIN_FARE = 1
   PENALTY_FARE = 6
-  
+
   def initialize
     @status = nil
     @entry = nil
