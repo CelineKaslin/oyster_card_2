@@ -9,6 +9,8 @@ describe Journey do
     expect(subject.start).to eq true
   end
 
-
+  it "should return false after journey finished" do
+    expect(subject.finish).to eq false
+  end
 
 end
