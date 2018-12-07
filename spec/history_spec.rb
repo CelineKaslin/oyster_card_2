@@ -18,4 +18,14 @@ describe History do
     subject.exit(:exit_station)
     expect(subject.save).to eq [{:entry_station => :exit_station}]
   end
+
+  it "should return a list of journeys done" do
+    subject.entry(:entry_station)
+    subject.exit(:exit_station)
+    2.times{subject.save}
+    expect(subject.history).to eq [{:entry_station => :exit_station}, {:entry_station => :exit_station}]
+
+
+  end
+
 end

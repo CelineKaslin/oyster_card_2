@@ -23,4 +23,8 @@ class History
     @history << {@entry_station => @exit_station}
   end
 
+  def list
+    @history
+  end
+
 end
